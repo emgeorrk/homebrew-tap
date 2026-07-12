@@ -1,27 +1,35 @@
 # homebrew-tap
 
 Homebrew tap for [Pulse](https://github.com/emgeorrk/pulse) — a native macOS
-menu bar system monitor (Apple Silicon).
+menu bar system monitor.
 
 ## Install
 
 ```sh
-brew install --cask --no-quarantine emgeorrk/tap/pulse
+brew install emgeorrk/tap/pulse
 ```
 
-The `--no-quarantine` flag is required: Pulse is ad-hoc signed but not notarized
-(no paid Apple Developer account), so without the flag macOS Gatekeeper blocks
-it. The flag tells Homebrew not to attach the quarantine attribute, which is the
-same thing `xattr -dr com.apple.quarantine` does for a manual download.
+This builds Pulse from source (Homebrew pulls in Go as a build dependency). A
+locally built app is **not quarantined**, so it launches with **no Gatekeeper
+prompt and no extra flags** — unlike a downloaded, un-notarized `.app`.
 
-Update later with:
+After install, `brew` prints how to launch it and, optionally, symlink it into
+`/Applications`. Update later with:
 
 ```sh
-brew upgrade --cask pulse
+brew upgrade pulse
 ```
 
-Uninstall (with `--zap` to also remove settings and the login LaunchAgent):
+Uninstall:
 
 ```sh
-brew uninstall --zap pulse
+brew uninstall pulse
 ```
+
+## Why a formula and not a cask?
+
+A cask would download the pre-built `.app` from GitHub Releases, but that build
+is ad-hoc signed and not notarized. Homebrew always quarantines cask downloads,
+removed the `--no-quarantine` flag, and is dropping support for casks that fail
+Gatekeeper. Building from source sidesteps all of that: the app is compiled on
+your machine, so macOS never quarantines it.
