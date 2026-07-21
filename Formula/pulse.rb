@@ -1,8 +1,8 @@
 class Pulse < Formula
   desc "Native macOS menu bar system monitor (Vitals-style feature set)"
   homepage "https://github.com/emgeorrk/pulse"
-  url "https://github.com/emgeorrk/pulse/archive/refs/tags/v1.0.2.tar.gz"
-  sha256 "aff29f32bd5ade70977397a940080db12766cb80f354f98e6c45fdb792c734f2"
+  url "https://github.com/emgeorrk/pulse/archive/refs/tags/v1.0.3.tar.gz"
+  sha256 "7b62ab19631209e1e58bfc1ef73583a1fd47e3041a30e21285faad7a32efa0c2"
   license "MIT"
   head "https://github.com/emgeorrk/pulse.git", branch: "main"
 
