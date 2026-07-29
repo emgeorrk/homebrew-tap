@@ -7,7 +7,7 @@ menu bar system monitor.
 
 ```sh
 brew install emgeorrk/tap/pulse
-ln -sfn "$(brew --prefix)/opt/pulse/Pulse.app" /Applications/Pulse.app
+ditto "$(brew --prefix)/opt/pulse/Pulse.app" /Applications/Pulse.app
 open /Applications/Pulse.app
 ```
 
