@@ -20,8 +20,10 @@ class Pulse < Formula
     # built app is not quarantined, so it launches without a Gatekeeper prompt.
     app = prefix/"Pulse.app"
     (app/"Contents/MacOS").mkpath
+    (app/"Contents/Resources").mkpath
     cp "pulse", app/"Contents/MacOS/pulse"
     cp "build/darwin/Info.plist", app/"Contents/Info.plist"
+    cp "build/darwin/AppIcon.icns", app/"Contents/Resources/AppIcon.icns"
 
     plist = app/"Contents/Info.plist"
     system "/usr/libexec/PlistBuddy", "-c", "Set :CFBundleShortVersionString #{version}", plist
@@ -37,8 +39,9 @@ class Pulse < Formula
       Pulse is a menu bar app (no Dock icon). Launch it with:
         open #{opt_prefix}/Pulse.app
 
-      To keep it in /Applications (so "Launch at Login" is tidy):
-        ln -sfn #{opt_prefix}/Pulse.app /Applications/Pulse.app
+      To show it in Spotlight and Launchpad, copy it into /Applications
+      (Spotlight does not index symlinked apps; re-run after each upgrade):
+        ditto #{opt_prefix}/Pulse.app /Applications/Pulse.app
         open /Applications/Pulse.app
 
       Built locally by Homebrew, so it is not quarantined — no Gatekeeper prompt.
